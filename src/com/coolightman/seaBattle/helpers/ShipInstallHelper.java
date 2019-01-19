@@ -39,24 +39,24 @@ public class ShipInstallHelper {
     }
 
     //      установка чаров больших кораблей на доску
-    static ArrayList<Integer> setBigShipCharsOnBoard(Board board, EDirection currentDirection, int[] firstCellRndCord, int SIZE) {
+    static ArrayList<Integer> setBigShipCharsOnBoard(EDirection currentDirection, int[] firstCellRndCord, int SIZE) {
         int numberOfFirstCell = numberOfCellFinder(firstCellRndCord);
         int[] anotherCellsNumbers = numbersOfAnotherCellsFinder(numberOfFirstCell, SIZE, currentDirection);
         ArrayList<Integer> shipCords = new ArrayList<>();
 
         for (int anotherCellNumber : anotherCellsNumbers) {
-            board.getCellList().get(anotherCellNumber).setCellChar(Figure.SHIPED);
+            Board.getCellList().get(anotherCellNumber).setCellChar(Figure.SHIPED);
             shipCords.add(anotherCellNumber);
         }
         return shipCords;
     }
 
     //       установка чара однопалубного корабля
-    static ArrayList<Integer> setShkonkaCharOnBoard(Board board, int[] firstCellRndCord) {
+    static ArrayList<Integer> setShkonkaCharOnBoard(int[] firstCellRndCord) {
         int numberOfCell = numberOfCellFinder(firstCellRndCord);
         ArrayList<Integer> shipCord = new ArrayList<>();
         shipCord.add(numberOfCell);
-        board.getCellList().get(numberOfCell).setCellChar(Figure.SHIPED);
+        Board.getCellList().get(numberOfCell).setCellChar(Figure.SHIPED);
         return shipCord;
     }
 
@@ -96,17 +96,17 @@ public class ShipInstallHelper {
         return anotherCellsNumbers;
     }
 
-    private static boolean checkCellsEmpty(int cellNumber, Board board) {
+    private static boolean checkCellsEmpty(int cellNumber) {
         boolean empty = false;
 
-        if (!board.getCellList().get(cellNumber).getCellChar().equals(Figure.SHIPED)) {
+        if (!Board.getCellList().get(cellNumber).getCellChar().equals(Figure.SHIPED)) {
             empty = true;
         }
 
         return empty;
     }
 
-    static boolean checkZoneForCellsEmpty(ArrayList<int[]> shipsZoneCellList, Board board) {
+    static boolean checkZoneForCellsEmpty(ArrayList<int[]> shipsZoneCellList) {
         boolean zoneIsEmpty = false;
 
 //              создаем коллекцию с не выходящими за границы вариантами окружающих ячеек (нах-ся в пределах поля)
@@ -128,7 +128,7 @@ public class ShipInstallHelper {
 //             проверяем все ячейки на занятость
         int goodCount = 0;
         for (int cellNumb : cellNumbList) {
-            if (!checkCellsEmpty(cellNumb, board)) {
+            if (!checkCellsEmpty(cellNumb)) {
                 goodCount++;
             }
         }

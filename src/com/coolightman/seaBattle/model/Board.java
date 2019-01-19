@@ -4,23 +4,17 @@ import java.util.ArrayList;
 
 public class Board {
 
-    private ArrayList<Cell> cellArrayList = new ArrayList<>();
+    private static ArrayList<Cell> cellArrayList = new ArrayList<>();
     private static String[] columnCords = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J"};
 
-    public Board() {
-        createBoard();
-    }
-
-    private void createBoard() {
-        for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 10; j++) {
-                Cell cell = new Cell();
-                cellArrayList.add(cell);
-            }
+    public static void createBoard() {
+        for (int i = 0; i < 100; i++) {
+            Cell cell = new Cell();
+            cellArrayList.add(cell);
         }
     }
 
-    public void printBoard() {
+    public static void printBoardWithShips() {
         int k = 0;
         System.out.print("   ");
         for (String columnCord : columnCords) {
@@ -39,7 +33,7 @@ public class Board {
         }
     }
 
-    public void printGameBoard() {
+    public static void printGameBoard() {
         int k = 0;
         System.out.print("   ");
         for (String columnCord : columnCords) {
@@ -61,7 +55,7 @@ public class Board {
         }
     }
 
-    public ArrayList<Cell> getCellList() {
+    public static ArrayList<Cell> getCellList() {
         return cellArrayList;
     }
 }

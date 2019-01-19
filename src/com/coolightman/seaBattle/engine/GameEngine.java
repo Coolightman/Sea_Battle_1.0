@@ -11,7 +11,6 @@ import java.util.ArrayList;
 
 public class GameEngine {
     private static ArrayList<Ship> shipArrayList = new ArrayList<>();
-    private static Board board = new Board();
 
     public static void start() {
         createModelsForGame();
@@ -19,11 +18,12 @@ public class GameEngine {
     }
 
     private static void createModelsForGame() {
-        arrangeShipsOnBoard(board);
+        Board.createBoard();
+        arrangeShipsOnBoard();
 
 //        выводит поле со всеми кораблями
-        board.printBoard();
-        board.printGameBoard();
+        Board.printBoardWithShips();
+        Board.printGameBoard();
     }
 
     private static void runGameProcess() {
@@ -41,9 +41,9 @@ public class GameEngine {
                 ArrayList<Integer> shipCords = shipArrayList.get(i).getShipCords();
                 for (int shipCord : shipCords) {
                     if (shipCord == moveCellNumber) {
-                        if (!board.getCellList().get(moveCellNumber).getCellChar().equals(Figure.X) &&
-                                !board.getCellList().get(moveCellNumber).getCellChar().equals(Figure.O)) {
-                            board.getCellList().get(moveCellNumber).setCellChar(Figure.O);
+                        if (!Board.getCellList().get(moveCellNumber).getCellChar().equals(Figure.X) &&
+                                !Board.getCellList().get(moveCellNumber).getCellChar().equals(Figure.O)) {
+                            Board.getCellList().get(moveCellNumber).setCellChar(Figure.O);
                             boolean shipDead = checkShipDead(i);
                             haveHit = true;
                             hitCounter++;
@@ -58,8 +58,8 @@ public class GameEngine {
             }
 
             if (!haveHit) {
-                if (!board.getCellList().get(moveCellNumber).getCellChar().equals(Figure.X) && !board.getCellList().get(moveCellNumber).getCellChar().equals(Figure.O)) {
-                    board.getCellList().get(moveCellNumber).setCellChar(Figure.MISS);
+                if (!Board.getCellList().get(moveCellNumber).getCellChar().equals(Figure.X) && !Board.getCellList().get(moveCellNumber).getCellChar().equals(Figure.O)) {
+                    Board.getCellList().get(moveCellNumber).setCellChar(Figure.MISS);
                 }
                 System.out.println("Miss!");
             }
@@ -68,7 +68,7 @@ public class GameEngine {
                 allShipsDead = true;
             }
 
-            board.printGameBoard();
+            Board.printGameBoard();
 
             movesCounter++;
 
@@ -82,13 +82,13 @@ public class GameEngine {
         ArrayList<Integer> shipCords = shipArrayList.get(shipNumber).getShipCords();
         int damagedParts = 0;
         for (int shipCord : shipCords) {
-            if (board.getCellList().get(shipCord).getCellChar().equals(Figure.O)) {
+            if (Board.getCellList().get(shipCord).getCellChar().equals(Figure.O)) {
                 damagedParts++;
             }
         }
         if (damagedParts == shipCords.size()) {
             for (int shipCord : shipCords) {
-                board.getCellList().get(shipCord).setCellChar(Figure.X);
+                Board.getCellList().get(shipCord).setCellChar(Figure.X);
             }
             shipDead = true;
             System.out.println("Ship " + shipArrayList.get(shipNumber).getFullShipName() + " is dead =(");
@@ -101,20 +101,20 @@ public class GameEngine {
 //        TODO game settings
     }
 
-    private static void arrangeShipsOnBoard(Board board) {
+    private static void arrangeShipsOnBoard() {
 
-        shipArrayList.add(new Ship(EShip.LINKOR, board, 1));
+        shipArrayList.add(new Ship(EShip.LINKOR, 1));
 
         for (int i = 0; i < 2; i++) {
-            shipArrayList.add(new Ship(EShip.KREISER, board, (i + 1)));
+            shipArrayList.add(new Ship(EShip.KREISER, (i + 1)));
         }
 
         for (int i = 0; i < 3; i++) {
-            shipArrayList.add(new Ship(EShip.ESMINEC, board, (i + 1)));
+            shipArrayList.add(new Ship(EShip.ESMINEC, (i + 1)));
         }
 
         for (int i = 0; i < 4; i++) {
-            shipArrayList.add(new Ship(EShip.SHKONKA, board, (i + 1)));
+            shipArrayList.add(new Ship(EShip.SHKONKA, (i + 1)));
         }
     }
 }

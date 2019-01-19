@@ -7,11 +7,9 @@ import java.util.ArrayList;
 
 public class Ship {
     private String fullShipName;
-    private Board board;
     private ArrayList<Integer> shipCords;
 
-    public Ship(EShip ship, Board board, int number) {
-        this.board = board;
+    public Ship(EShip ship, int number) {
         findSetterForShip(ship);
         this.fullShipName = ship + "_" + number;
     }
@@ -20,26 +18,22 @@ public class Ship {
         switch (shipName) {
             case LINKOR:
                 int shipSize = 4;
-                this.shipCords = ShipInstall.setBigShipCords(board, shipSize);
+                this.shipCords = ShipInstall.setBigShipCords(shipSize);
                 break;
 
             case KREISER:
                 shipSize = 3;
-                this.shipCords = ShipInstall.setBigShipCords(board, shipSize);
+                this.shipCords = ShipInstall.setBigShipCords(shipSize);
                 break;
 
             case ESMINEC:
                 shipSize = 2;
-                this.shipCords = ShipInstall.setBigShipCords(board, shipSize);
+                this.shipCords = ShipInstall.setBigShipCords(shipSize);
                 break;
 
             case SHKONKA:
-                shipSize = 1;
-                this.shipCords = ShipInstall.setShkonkaCords(board);
+                this.shipCords = ShipInstall.setShkonkaCords();
                 break;
-
-            default:
-                shipSize = 0;
         }
     }
 

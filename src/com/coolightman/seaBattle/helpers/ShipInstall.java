@@ -1,14 +1,12 @@
 package com.coolightman.seaBattle.helpers;
 
-import com.coolightman.seaBattle.model.Board;
-
 import java.util.ArrayList;
 
 import static com.coolightman.seaBattle.helpers.ShipInstallHelper.*;
 
 
 public class ShipInstall {
-    public static ArrayList<Integer> setBigShipCords(Board board, int shipSize) {
+    public static ArrayList<Integer> setBigShipCords(int shipSize) {
 
 //        число попыток выбора рандомного направления
         int NUMB_DIR_TRY = 8;
@@ -28,7 +26,7 @@ public class ShipInstall {
                 shipsZoneCellList = chooseZoneCellListByDirection(currentDirection, x, y, shipSize);
 
                 if (validityShipCells(x, y, currentDirection, shipSize)) {
-                    clearPlace = checkZoneForCellsEmpty(shipsZoneCellList, board);
+                    clearPlace = checkZoneForCellsEmpty(shipsZoneCellList);
                 }
 
                 if (clearPlace) break;
@@ -36,10 +34,10 @@ public class ShipInstall {
 
         } while (!clearPlace);
 
-        return setBigShipCharsOnBoard(board, currentDirection, firstCellRndCord, shipSize);
+        return setBigShipCharsOnBoard(currentDirection, firstCellRndCord, shipSize);
     }
 
-    public static ArrayList<Integer> setShkonkaCords(Board board) {
+    public static ArrayList<Integer> setShkonkaCords() {
         boolean clearPlace;
         int[] firstCellRndCord;
         do {
@@ -56,10 +54,10 @@ public class ShipInstall {
                     shipsZoneCellList.add(cell);
                 }
             }
-            clearPlace = checkZoneForCellsEmpty(shipsZoneCellList, board);
+            clearPlace = checkZoneForCellsEmpty(shipsZoneCellList);
 
         } while (!clearPlace);
 
-        return setShkonkaCharOnBoard(board, firstCellRndCord);
+        return setShkonkaCharOnBoard(firstCellRndCord);
     }
 }
