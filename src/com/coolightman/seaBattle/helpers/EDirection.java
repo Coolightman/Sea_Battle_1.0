@@ -4,6 +4,5 @@ public enum EDirection {
     NORTH,
     SOUTH,
     WEST,
-    EAST,
-    OUT_OF_DIRECTION
+    EAST
 }

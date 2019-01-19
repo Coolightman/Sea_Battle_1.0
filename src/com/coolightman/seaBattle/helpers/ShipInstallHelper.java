@@ -1,6 +1,7 @@
 package com.coolightman.seaBattle.helpers;
 
 import com.coolightman.seaBattle.model.Board;
+import com.coolightman.seaBattle.model.Figure;
 
 import java.util.ArrayList;
 
@@ -44,7 +45,7 @@ public class ShipInstallHelper {
         ArrayList<Integer> shipCords = new ArrayList<>();
 
         for (int anotherCellNumber : anotherCellsNumbers) {
-            board.getCellList().get(anotherCellNumber).setCellChar('#');
+            board.getCellList().get(anotherCellNumber).setCellChar(Figure.SHIPED);
             shipCords.add(anotherCellNumber);
         }
         return shipCords;
@@ -55,7 +56,7 @@ public class ShipInstallHelper {
         int numberOfCell = numberOfCellFinder(firstCellRndCord);
         ArrayList<Integer> shipCord = new ArrayList<>();
         shipCord.add(numberOfCell);
-        board.getCellList().get(numberOfCell).setCellChar('#');
+        board.getCellList().get(numberOfCell).setCellChar(Figure.SHIPED);
         return shipCord;
     }
 
@@ -98,7 +99,7 @@ public class ShipInstallHelper {
     private static boolean checkCellsEmpty(int cellNumber, Board board) {
         boolean empty = false;
 
-        if (!board.getCellList().get(cellNumber).getCellChar().equals('#')) {
+        if (!board.getCellList().get(cellNumber).getCellChar().equals(Figure.SHIPED)) {
             empty = true;
         }
 

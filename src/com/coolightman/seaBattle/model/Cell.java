@@ -1,36 +1,18 @@
 package com.coolightman.seaBattle.model;
 
 public class Cell {
-    private int columnCord;
-    private int lineCord;
-    private int[] cord = new int[2];
-    private Character cellChar;
 
-    Cell(int columnCord, int lineCord) {
-        this.columnCord = columnCord;
-        this.lineCord = lineCord;
-        cord[0] = columnCord;
-        cord[1] = lineCord;
-        this.cellChar = '_';
+    private Figure cellChar;
+
+    Cell() {
+        this.cellChar = Figure.EMPTY;
     }
 
-    public int getColumnCord() {
-        return columnCord;
-    }
-
-    public int getLineCord() {
-        return lineCord;
-    }
-
-    public int[] getCord() {
-        return cord;
-    }
-
-    public Character getCellChar() {
+    public Figure getCellChar() {
         return cellChar;
     }
 
-    public void setCellChar(Character cellChar) {
+    public void setCellChar(Figure cellChar) {
         this.cellChar = cellChar;
     }
 }

@@ -4,6 +4,7 @@ import com.coolightman.seaBattle.helpers.ReceiveMoveHelper;
 import com.coolightman.seaBattle.helpers.ShipInstallHelper;
 import com.coolightman.seaBattle.model.Board;
 import com.coolightman.seaBattle.model.EShip;
+import com.coolightman.seaBattle.model.Figure;
 import com.coolightman.seaBattle.model.Ship;
 
 import java.util.ArrayList;
@@ -21,7 +22,7 @@ public class GameEngine {
         arrangeShipsOnBoard(board);
 
 //        выводит поле со всеми кораблями
-//        board.printBoard();
+        board.printBoard();
         board.printGameBoard();
     }
 
@@ -40,9 +41,9 @@ public class GameEngine {
                 ArrayList<Integer> shipCords = shipArrayList.get(i).getShipCords();
                 for (int shipCord : shipCords) {
                     if (shipCord == moveCellNumber) {
-                        if (!board.getCellList().get(moveCellNumber).getCellChar().equals('X') &&
-                                !board.getCellList().get(moveCellNumber).getCellChar().equals('O')) {
-                            board.getCellList().get(moveCellNumber).setCellChar('O');
+                        if (!board.getCellList().get(moveCellNumber).getCellChar().equals(Figure.X) &&
+                                !board.getCellList().get(moveCellNumber).getCellChar().equals(Figure.O)) {
+                            board.getCellList().get(moveCellNumber).setCellChar(Figure.O);
                             boolean shipDead = checkShipDead(i);
                             haveHit = true;
                             hitCounter++;
@@ -57,8 +58,8 @@ public class GameEngine {
             }
 
             if (!haveHit) {
-                if (!board.getCellList().get(moveCellNumber).getCellChar().equals('X') && !board.getCellList().get(moveCellNumber).getCellChar().equals('O')) {
-                    board.getCellList().get(moveCellNumber).setCellChar('*');
+                if (!board.getCellList().get(moveCellNumber).getCellChar().equals(Figure.X) && !board.getCellList().get(moveCellNumber).getCellChar().equals(Figure.O)) {
+                    board.getCellList().get(moveCellNumber).setCellChar(Figure.MISS);
                 }
                 System.out.println("Miss!");
             }
@@ -81,13 +82,13 @@ public class GameEngine {
         ArrayList<Integer> shipCords = shipArrayList.get(shipNumber).getShipCords();
         int damagedParts = 0;
         for (int shipCord : shipCords) {
-            if (board.getCellList().get(shipCord).getCellChar().equals('O')) {
+            if (board.getCellList().get(shipCord).getCellChar().equals(Figure.O)) {
                 damagedParts++;
             }
         }
         if (damagedParts == shipCords.size()) {
             for (int shipCord : shipCords) {
-                board.getCellList().get(shipCord).setCellChar('X');
+                board.getCellList().get(shipCord).setCellChar(Figure.X);
             }
             shipDead = true;
             System.out.println("Ship " + shipArrayList.get(shipNumber).getFullShipName() + " is dead =(");

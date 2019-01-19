@@ -14,7 +14,7 @@ public class Board {
     private void createBoard() {
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
-                Cell cell = new Cell(i, j);
+                Cell cell = new Cell();
                 cellArrayList.add(cell);
             }
         }
@@ -31,8 +31,8 @@ public class Board {
         for (int i = 0; i < 10; i++) {
             System.out.print("(" + (i) + ")\t");
             for (int j = 0; j < 10; j++) {
-                Character character = cellArrayList.get(k).getCellChar();
-                System.out.print("|" + character + "|");
+                Figure figure = cellArrayList.get(k).getCellChar();
+                System.out.print("|" + figure + "|");
                 k++;
             }
             System.out.println();
@@ -50,11 +50,11 @@ public class Board {
         for (int i = 0; i < 10; i++) {
             System.out.print("(" + (i) + ")\t");
             for (int j = 0; j < 10; j++) {
-                Character character = cellArrayList.get(k).getCellChar();
-                if (character.equals('#')) {
-                    character = '_';
+                Figure figure = cellArrayList.get(k).getCellChar();
+                if (figure.equals(Figure.SHIPED)) {
+                    figure = Figure.EMPTY;
                 }
-                System.out.print("|" + character + "|");
+                System.out.print("|" + figure + "|");
                 k++;
             }
             System.out.println();
