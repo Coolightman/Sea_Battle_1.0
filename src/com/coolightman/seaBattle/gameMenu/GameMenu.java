@@ -1,43 +1,56 @@
 package com.coolightman.seaBattle.gameMenu;
 
 import com.coolightman.seaBattle.engine.GameEngine;
+import com.coolightman.seaBattle.exceptions.SBGameWrongMenuNumberException;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class GameMenu {
+
     public static void start() {
-        boolean runMenuAgain = true;
-        do {
-            showMainMenu();
-            String menuInnerVal = mainMenuInner();
-            menuInnerVal = menuInnerVal.trim();
+        mainMenu();
+    }
 
-            if (menuInnerVal.length() > 1) {
-                System.out.println("Too long number format. Try again:");
-            } else {
-                switch (menuInnerVal) {
-                    case "1":
-                        gameStarter();
-                        runMenuAgain = false;
-                        gameEnding();
-                        break;
+    private static void mainMenu() {
+        showMainMenu();
+        int userMenuVal = menuInner();
+        switch (userMenuVal) {
+            case 1:
+                GameEngine.start();
+                repeatMenu();
+                gameEnding();
+                break;
 
-                    case "2":
-                        gameSettings();
-                        break;
+            case 2:
+                gameSettings();
+                break;
 
-                    case "3":
-                        gameEnding();
-                        runMenuAgain = false;
-                        break;
+            case 3:
+                gameEnding();
+                break;
 
-                    default:
-                        System.out.print(
-                                "Wrong number. Choose another menu item:\n" +
-                                        ">");
-                }
-            }
-        } while (runMenuAgain);
+            default:
+                System.out.println("Wrong menu number. Try again:");
+                mainMenu();
+        }
+    }
+
+    private static void repeatMenu() {
+        showRepeatMenu();
+        int userMenuVal = repeatMenuInner();
+        switch (userMenuVal) {
+            case 1:
+                mainMenu();
+                break;
+
+            case 2:
+                break;
+
+            default:
+                System.out.println("Wrong menu number. Try again:");
+                repeatMenu();
+        }
     }
 
     private static void showMainMenu() {
@@ -49,19 +62,36 @@ public class GameMenu {
                         ">");
     }
 
-    private static String mainMenuInner() {
-        Scanner menuScanner = new Scanner(System.in);
-        return menuScanner.next();
+    private static void showRepeatMenu() {
+        System.out.println(
+                "Do you wan't repeat Game?\n" +
+                        "1-Yes\n" +
+                        "2-No. Exit.\n" +
+                        ">");
     }
 
-    private static void gameStarter() {
-        boolean wannaGameRepeat;
-
-        do {
-            GameEngine.start();
-            wannaGameRepeat = repeatGame();
+    private static int menuInner() {
+        Scanner menuScanner = new Scanner(System.in);
+        int inMenuVal = -1;
+        try {
+            inMenuVal = menuScanner.nextInt();
+        } catch (Exception e) {
+            System.out.println("Inner Value has wrong format! Try again:");
+            mainMenu();
         }
-        while (wannaGameRepeat);
+        return inMenuVal;
+    }
+
+    private static int repeatMenuInner() {
+        Scanner menuScanner = new Scanner(System.in);
+        int inMenuVal = -1;
+        try {
+            inMenuVal = menuScanner.nextInt();
+        } catch (Exception e) {
+            System.out.println("Inner Value has wrong format! Try again:");
+            repeatMenu();
+        }
+        return inMenuVal;
     }
 
     private static void gameSettings() {
@@ -72,37 +102,5 @@ public class GameMenu {
         System.out.println(
                 "Game End!\n" +
                         "Goodbye =)");
-    }
-
-    private static boolean repeatGame() {
-        System.out.println(
-                "Do you wan't repeat Game?\n" +
-                        "1-Yes\n" +
-                        "2-No. Exit.\n" +
-                        ">");
-
-        boolean wannaGameRepeat = true;
-        boolean runRepeatMenuAgain = true;
-        String menuInnerValue = mainMenuInner();
-
-        do {
-            switch (menuInnerValue) {
-                case "1":
-                    runRepeatMenuAgain = false;
-                    break;
-
-                case "2":
-                    runRepeatMenuAgain = false;
-                    wannaGameRepeat = false;
-                    break;
-
-                default:
-                    System.out.print(
-                            "Choose another menu item!\n" +
-                                    ">");
-            }
-        } while (runRepeatMenuAgain);
-
-        return wannaGameRepeat;
     }
 }
