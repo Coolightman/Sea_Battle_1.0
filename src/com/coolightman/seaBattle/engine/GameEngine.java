@@ -1,6 +1,6 @@
 package com.coolightman.seaBattle.engine;
 
-import com.coolightman.seaBattle.helpers.ReceiveMoveHelper;
+import com.coolightman.seaBattle.helpers.MoveReceiver;
 import com.coolightman.seaBattle.helpers.ShipInstallHelper;
 import com.coolightman.seaBattle.model.Board;
 import com.coolightman.seaBattle.model.EShip;
@@ -33,7 +33,7 @@ public class GameEngine {
 
         do {
 
-            int[] playerMove = ReceiveMoveHelper.receivePlayerMove();
+            int[] playerMove = MoveReceiver.receivePlayerMove();
             int moveCellNumber = ShipInstallHelper.numberOfCellFinder(playerMove);
             boolean haveHit = false;
 

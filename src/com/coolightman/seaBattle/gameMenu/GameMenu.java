@@ -1,9 +1,7 @@
 package com.coolightman.seaBattle.gameMenu;
 
 import com.coolightman.seaBattle.engine.GameEngine;
-import com.coolightman.seaBattle.exceptions.SBGameWrongMenuNumberException;
 
-import java.io.IOException;
 import java.util.Scanner;
 
 public class GameMenu {
@@ -14,7 +12,7 @@ public class GameMenu {
 
     private static void mainMenu() {
         showMainMenu();
-        int userMenuVal = menuInner();
+        int userMenuVal = mainMenuInner();
         switch (userMenuVal) {
             case 1:
                 GameEngine.start();
@@ -24,6 +22,7 @@ public class GameMenu {
 
             case 2:
                 gameSettings();
+                mainMenu();
                 break;
 
             case 3:
@@ -70,7 +69,7 @@ public class GameMenu {
                         ">");
     }
 
-    private static int menuInner() {
+    private static int mainMenuInner() {
         Scanner menuScanner = new Scanner(System.in);
         int inMenuVal = -1;
         try {
