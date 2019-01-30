@@ -7,10 +7,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="03ed6708-a943-4449-84c3-263f0c776c3e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/com/coolightman/seaBattle/exceptions/SBGameWrongLengthCoordinateException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/coolightman/seaBattle/exceptions/SBGameBusyZoneException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/coolightman/seaBattle/exceptions/SBGameException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/coolightman/seaBattle/exceptions/SBGameException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/coolightman/seaBattle/helpers/MoveReceiver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/coolightman/seaBattle/helpers/MoveReceiver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/coolightman/seaBattle/helpers/ShipInstall.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/coolightman/seaBattle/helpers/ShipInstall.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/coolightman/seaBattle/helpers/ShipInstallHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/coolightman/seaBattle/helpers/ShipInstallHelper.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -23,24 +23,24 @@
     <session id="-132855172">
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="java" value="23" />
+          <entry key="java" value="39" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="JAVA" value="23" />
+          <entry key="JAVA" value="39" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="2845" />
-          <entry key="txt" value="21" />
+          <entry key="java" value="3793" />
+          <entry key="txt" value="34" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="2845" />
-          <entry key="PLAIN_TEXT" value="21" />
+          <entry key="JAVA" value="3793" />
+          <entry key="PLAIN_TEXT" value="34" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.lifecycle.project">
@@ -55,13 +55,10 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/com/coolightman/seaBattle/helpers/MoveReceiver.java">
+        <entry file="file://$PROJECT_DIR$/src/com/coolightman/seaBattle/helpers/ShipInstall.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1343">
-              <caret line="79" column="9" lean-forward="true" selection-start-line="79" selection-start-column="9" selection-end-line="79" selection-end-column="9" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="323">
+              <caret line="23" column="39" lean-forward="true" selection-start-line="23" selection-start-column="39" selection-end-line="23" selection-end-column="39" />
             </state>
           </provider>
         </entry>
@@ -95,8 +92,6 @@
         <option value="$PROJECT_DIR$/src/com/coolightman/seaBattle/model/Figure.java" />
         <option value="$PROJECT_DIR$/src/com/coolightman/seaBattle/helpers/EDirection.java" />
         <option value="$PROJECT_DIR$/src/com/coolightman/seaBattle/model/Ship.java" />
-        <option value="$PROJECT_DIR$/src/com/coolightman/seaBattle/helpers/ShipInstallHelper.java" />
-        <option value="$PROJECT_DIR$/src/com/coolightman/seaBattle/helpers/ShipInstall.java" />
         <option value="$PROJECT_DIR$/src/com/coolightman/seaBattle/model/Board.java" />
         <option value="$PROJECT_DIR$/test/com/coolightman/seaBattle/model/CellTest.java" />
         <option value="$PROJECT_DIR$/src/com/coolightman/seaBattle/exceptions/SBGameWrongMenuNumberException.java" />
@@ -110,12 +105,16 @@
         <option value="$PROJECT_DIR$/src/com/coolightman/seaBattle/exceptions/SBGameWrongLengthCoordinateException.java" />
         <option value="$PROJECT_DIR$/src/com/coolightman/seaBattle/helpers/MoveReceiver.java" />
         <option value="$PROJECT_DIR$/src/com/coolightman/seaBattle/exceptions/SBGameException.java" />
+        <option value="$PROJECT_DIR$/src/com/coolightman/seaBattle/exceptions/SBGameBusyZoneException.java" />
+        <option value="$PROJECT_DIR$/src/com/coolightman/seaBattle/exceptions/SBGameBusyDirectionException.java" />
+        <option value="$PROJECT_DIR$/src/com/coolightman/seaBattle/helpers/ShipInstallHelper.java" />
+        <option value="$PROJECT_DIR$/src/com/coolightman/seaBattle/helpers/ShipInstall.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="1928" />
-    <option name="width" value="1480" />
+    <option name="width" value="1420" />
     <option name="height" value="1059" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
@@ -158,6 +157,13 @@
               <item name="Sea_Battle_1.0" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="seaBattle" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Sea_Battle_1.0" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Sea_Battle_1.0" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="seaBattle" type="462c0819:PsiDirectoryNode" />
+              <item name="engine" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Sea_Battle_1.0" type="b2602c69:ProjectViewProjectNode" />
@@ -308,7 +314,14 @@
       <option name="project" value="LOCAL" />
       <updated>1548848834398</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="rebuild move receiver to try/catch">
+      <created>1548851064857</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1548851064857</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -320,13 +333,13 @@
     </history-entry>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1928" y="0" width="1480" height="1059" extended-state="0" />
+    <frame x="1928" y="0" width="1420" height="1059" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Image Layers" />
       <window_info id="UI Designer" />
       <window_info id="Capture Tool" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16971831" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.20441176" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -355,7 +368,7 @@
       <window_info id="Image Layers" order="0" />
       <window_info id="UI Designer" order="1" />
       <window_info id="Capture Tool" order="2" />
-      <window_info content_ui="combo" id="Project" order="3" visible="true" weight="0.22952381" />
+      <window_info active="true" content_ui="combo" id="Project" order="3" visible="true" weight="0.16971831" />
       <window_info id="Structure" order="4" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="5" />
       <window_info id="Favorites" order="6" side_tool="true" />
@@ -388,7 +401,8 @@
     <MESSAGE value="Change characters for figures" />
     <MESSAGE value="do static Board" />
     <MESSAGE value="rebuild move receiver" />
-    <option name="LAST_COMMIT_MESSAGE" value="rebuild move receiver" />
+    <MESSAGE value="rebuild move receiver to try/catch" />
+    <option name="LAST_COMMIT_MESSAGE" value="rebuild move receiver to try/catch" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/seaBattle/gameMenu/GameMenu.java" />
@@ -401,38 +415,10 @@
     <entry file="file://$PROJECT_DIR$/src/seaBattle/model/Ship.java" />
     <entry file="file://$PROJECT_DIR$/src/seaBattle/launcher/GameLauncher.java" />
     <entry file="file://$PROJECT_DIR$/src/seaBattle/engine/GameEngine.java" />
-    <entry file="file://$PROJECT_DIR$/src/com/coolightman/seaBattle/model/Figure.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="28" column="45" lean-forward="true" selection-start-line="28" selection-start-column="45" selection-end-line="28" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/coolightman/seaBattle/model/EShip.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
           <caret line="2" column="12" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/coolightman/seaBattle/helpers/ShipInstall.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" selection-start-line="2" selection-end-line="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/coolightman/seaBattle/model/Ship.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="20" column="53" lean-forward="true" selection-start-line="20" selection-start-column="53" selection-end-line="20" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/coolightman/seaBattle/helpers/ShipInstallHelper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="32" column="51" selection-start-line="32" selection-start-column="51" selection-end-line="32" selection-end-column="51" />
         </state>
       </provider>
     </entry>
@@ -447,13 +433,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
           <caret line="16" column="5" selection-start-line="16" selection-start-column="5" selection-end-line="16" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/coolightman/seaBattle/model/Board.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-192">
-          <caret line="20" column="48" lean-forward="true" selection-start-line="20" selection-start-column="48" selection-end-line="20" selection-end-column="48" />
         </state>
       </provider>
     </entry>
@@ -478,13 +457,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1411">
           <caret line="87" column="46" lean-forward="true" selection-start-line="87" selection-start-column="46" selection-end-line="87" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/coolightman/seaBattle/engine/GameEngine.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="169">
-          <caret line="17" column="5" lean-forward="true" selection-start-line="17" selection-start-column="5" selection-end-line="17" selection-end-column="5" />
         </state>
       </provider>
     </entry>
@@ -513,13 +485,69 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/coolightman/seaBattle/model/Board.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="20" column="48" lean-forward="true" selection-start-line="20" selection-start-column="48" selection-end-line="20" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/coolightman/seaBattle/model/Figure.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="28" column="45" lean-forward="true" selection-start-line="28" selection-start-column="45" selection-end-line="28" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/coolightman/seaBattle/engine/GameEngine.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="17" column="5" lean-forward="true" selection-start-line="17" selection-start-column="5" selection-end-line="17" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/coolightman/seaBattle/helpers/MoveReceiver.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1343">
-          <caret line="79" column="9" lean-forward="true" selection-start-line="79" selection-start-column="9" selection-end-line="79" selection-end-column="9" />
+        <state relative-caret-position="1275">
+          <caret line="75" column="28" lean-forward="true" selection-start-line="75" selection-start-column="28" selection-end-line="75" selection-end-column="28" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/coolightman/seaBattle/exceptions/SBGameBusyZoneException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/coolightman/seaBattle/model/Ship.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="544">
+          <caret line="34" column="54" selection-start-line="34" selection-start-column="54" selection-end-line="34" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/coolightman/seaBattle/exceptions/SBGameBusyDirectionException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="65" selection-start-line="4" selection-start-column="65" selection-end-line="4" selection-end-column="65" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/coolightman/seaBattle/helpers/ShipInstallHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="15" column="35" selection-start-line="15" selection-start-column="35" selection-end-line="15" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/coolightman/seaBattle/helpers/ShipInstall.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="23" column="39" lean-forward="true" selection-start-line="23" selection-start-column="39" selection-end-line="23" selection-end-column="39" />
         </state>
       </provider>
     </entry>

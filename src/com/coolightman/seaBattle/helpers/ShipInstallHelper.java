@@ -1,5 +1,6 @@
 package com.coolightman.seaBattle.helpers;
 
+import com.coolightman.seaBattle.exceptions.SBGameBusyZoneException;
 import com.coolightman.seaBattle.model.Board;
 import com.coolightman.seaBattle.model.Figure;
 
@@ -7,10 +8,12 @@ import java.util.ArrayList;
 
 public class ShipInstallHelper {
     //    выбор рандомных координат первой ячейки
-    static int[] chooseRndValidNumb() {
+    static int[] chooseRndValidCell() {
         int[] rndNumb = new int[2];
         rndNumb[0] = (int) (Math.random() * 10);
         rndNumb[1] = (int) (Math.random() * 10);
+
+//        TODO check for cell empty
         return rndNumb;
     }
 
@@ -106,8 +109,7 @@ public class ShipInstallHelper {
         return empty;
     }
 
-    static boolean checkZoneForCellsEmpty(ArrayList<int[]> shipsZoneCellList) {
-        boolean zoneIsEmpty = false;
+    static void checkZoneForCellsEmpty(ArrayList<int[]> shipsZoneCellList) throws SBGameBusyZoneException {
 
 //              создаем коллекцию с не выходящими за границы вариантами окружающих ячеек (нах-ся в пределах поля)
         ArrayList<int[]> validShipsZoneCellList = new ArrayList<>();
@@ -133,15 +135,15 @@ public class ShipInstallHelper {
             }
         }
 
-        if (goodCount == 0) {
-            zoneIsEmpty = true;
+        if (goodCount != 0) {
+            throw new SBGameBusyZoneException();
         }
-
-        return zoneIsEmpty;
     }
 
     //    находим зону проверки незанятости для большого корабля
-    static ArrayList<int[]> chooseZoneCellListByDirection(EDirection currentDirection, int x, int y, int SIZE) {
+    static ArrayList<int[]> createZoneCellList(EDirection currentDirection, int[] firstCellRndCord, int SIZE) {
+        int x = firstCellRndCord[0];
+        int y = firstCellRndCord[1];
         ArrayList<int[]> shipsZoneCellList = new ArrayList<>();
         switch (currentDirection) {
             case NORTH:
@@ -184,19 +186,17 @@ public class ShipInstallHelper {
     }
 
     //    проверяем что бы достраиваемые ячейки корабля не выходили за границы поля
-    static boolean validityShipCells(int x, int y, EDirection currentDirection, int SIZE) {
-        boolean valid = false;
+    static void validityShipCells(int[] firstCellRndCord, EDirection currentDirection, int SIZE) throws SBGameBusyZoneException {
+        int x = firstCellRndCord[0];
+        int y = firstCellRndCord[1];
         switch (currentDirection) {
             case NORTH:
                 for (int i = 0; i < SIZE; i++) {
                     int[] cell = {x, y - i};
                     int columnCord = cell[0];
                     int lineCord = cell[1];
-                    if (columnCord >= 0 && columnCord <= 9 && lineCord >= 0 && lineCord <= 9) {
-                        valid = true;
-                    } else {
-                        valid = false;
-                        break;
+                    if (columnCord < 0 || columnCord > 9 || lineCord < 0 || lineCord > 9) {
+                        throw new SBGameBusyZoneException();
                     }
                 }
                 break;
@@ -206,11 +206,8 @@ public class ShipInstallHelper {
                     int[] cell = {x, y + i};
                     int columnCord = cell[0];
                     int lineCord = cell[1];
-                    if (columnCord >= 0 && columnCord <= 9 && lineCord >= 0 && lineCord <= 9) {
-                        valid = true;
-                    } else {
-                        valid = false;
-                        break;
+                    if (columnCord < 0 || columnCord > 9 || lineCord < 0 || lineCord > 9) {
+                        throw new SBGameBusyZoneException();
                     }
                 }
                 break;
@@ -220,11 +217,8 @@ public class ShipInstallHelper {
                     int[] cell = {x - i, y};
                     int columnCord = cell[0];
                     int lineCord = cell[1];
-                    if (columnCord >= 0 && columnCord <= 9 && lineCord >= 0 && lineCord <= 9) {
-                        valid = true;
-                    } else {
-                        valid = false;
-                        break;
+                    if (columnCord < 0 || columnCord > 9 || lineCord < 0 || lineCord > 9) {
+                        throw new SBGameBusyZoneException();
                     }
                 }
                 break;
@@ -234,15 +228,11 @@ public class ShipInstallHelper {
                     int[] cell = {x + i, y};
                     int columnCord = cell[0];
                     int lineCord = cell[1];
-                    if (columnCord >= 0 && columnCord <= 9 && lineCord >= 0 && lineCord <= 9) {
-                        valid = true;
-                    } else {
-                        valid = false;
-                        break;
+                    if (columnCord < 0 || columnCord > 9 || lineCord < 0 || lineCord > 9) {
+                        throw new SBGameBusyZoneException();
                     }
                 }
                 break;
         }
-        return valid;
     }
 }
