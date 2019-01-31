@@ -17,6 +17,7 @@ public class ShipInstall {
 
     public static ArrayList<Integer> setBigShipCords(int shipSize) {
         SHIP_SIZE = shipSize;
+
         tryToSetBigShipOnBoard();
         return setBigShipCharsOnBoard(currentDirection, firstCellRndCord, SHIP_SIZE);
     }
@@ -38,7 +39,7 @@ public class ShipInstall {
             validityShipCells(firstCellRndCord, currentDirection, SHIP_SIZE);
             checkZoneForCellsEmpty(shipsZoneCellList);
         } catch (SBGameBusyZoneException e) {
-//          number of trying to set on random direction
+//              число попыток выбора рандомного направления
             int NUMB_DIR_TRY = 6;
             currentDirectionTry++;
             if (currentDirectionTry <= NUMB_DIR_TRY) {
@@ -54,7 +55,7 @@ public class ShipInstall {
 
     private static void tryToSetShkonkaOnBoard() {
         firstCellRndCord = chooseRndValidCell();
-        ArrayList<int[]> shipsZoneCellList = ShipInstallHelper.createArrayOfNeighborCellsZone(firstCellRndCord);
+        ArrayList<int[]> shipsZoneCellList = createArrayOfNeighborCellsZone(firstCellRndCord);
 
         try {
             checkZoneForCellsEmpty(shipsZoneCellList);
