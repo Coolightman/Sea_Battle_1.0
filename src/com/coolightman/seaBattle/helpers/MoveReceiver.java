@@ -1,8 +1,5 @@
 package com.coolightman.seaBattle.helpers;
 
-//created by ${USER}
-//${DATE} ${TIME}
-
 import com.coolightman.seaBattle.exceptions.SBGameWrongCoordinateException;
 import com.coolightman.seaBattle.exceptions.SBGameWrongLengthCoordinateException;
 
@@ -10,27 +7,20 @@ import java.util.Scanner;
 
 public class MoveReceiver {
 
-    private static int[] playerMove = new int[2];
-
-//        Algorithm:
-//        1) receive inner value from command line
-//        2) check value length
-//        3) check move for validity
-//        4) remake inner move to int[]
+    private static int[] move = new int[2];
 
     public static int[] receivePlayerMove() {
         receiveMove();
-        return playerMove;
+        return move;
     }
 
     private static void receiveMove() {
+        System.out.println("Do your move:\n>");
+        String stringMove = receiveCommandLineMove();
+
         try {
-            System.out.println("Do your move:\n>");
-            String stringMove = receiveMoveFromCommandLine();
             checkMoveLength(stringMove);
-            char columnLetter = stringMove.charAt(0);
-            char lineNumber = stringMove.charAt(1);
-            checkMove(columnLetter, lineNumber);
+            checkMoveValid(stringMove);
         } catch (SBGameWrongLengthCoordinateException e) {
             System.out.println(e.getMessage());
             receiveMove();
@@ -40,10 +30,10 @@ public class MoveReceiver {
         }
     }
 
-    private static String receiveMoveFromCommandLine() {
+    private static String receiveCommandLineMove() {
         Scanner scanner = new Scanner(System.in);
-        String playerStringMove = scanner.next();
-        return playerStringMove.trim().toUpperCase();
+        String stringMove = scanner.next();
+        return stringMove.trim().toUpperCase();
     }
 
     private static void checkMoveLength(String stringMove) throws SBGameWrongLengthCoordinateException {
@@ -54,7 +44,9 @@ public class MoveReceiver {
         }
     }
 
-    private static void checkMove(char columnLetter, char lineNumber) throws SBGameWrongCoordinateException {
+    private static void checkMoveValid(String stringMove) throws SBGameWrongCoordinateException {
+        char columnLetter = stringMove.charAt(0);
+        char lineNumber = stringMove.charAt(1);
         if (checkColumnLetter(columnLetter) == -1 | checkLineNumber(lineNumber) == -1)
             throw new SBGameWrongCoordinateException();
     }
@@ -63,7 +55,7 @@ public class MoveReceiver {
         char[] columnsLetters = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'};
         for (int i = 0; i < 10; i++) {
             if (columnsLetters[i] == columnLetter) {
-                playerMove[0] = i;
+                move[0] = i;
                 return i;
             }
         }
@@ -74,7 +66,7 @@ public class MoveReceiver {
         int line = Character.getNumericValue(lineNumber);
         for (int i = 0; i < 10; i++) {
             if (line == i) {
-                playerMove[1] = i;
+                move[1] = i;
                 return i;
             }
         }

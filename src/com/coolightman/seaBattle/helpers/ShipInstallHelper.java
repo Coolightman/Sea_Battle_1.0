@@ -1,5 +1,6 @@
 package com.coolightman.seaBattle.helpers;
 
+import com.coolightman.seaBattle.exceptions.SBGameBusyCell;
 import com.coolightman.seaBattle.exceptions.SBGameBusyZoneException;
 import com.coolightman.seaBattle.model.Board;
 import com.coolightman.seaBattle.model.Figure;
@@ -7,14 +8,25 @@ import com.coolightman.seaBattle.model.Figure;
 import java.util.ArrayList;
 
 public class ShipInstallHelper {
-    //    выбор рандомных координат первой ячейки
-    static int[] chooseRndValidCell() {
-        int[] rndNumb = new int[2];
-        rndNumb[0] = (int) (Math.random() * 10);
-        rndNumb[1] = (int) (Math.random() * 10);
 
-//        TODO check for cell empty
-        return rndNumb;
+    private static int[] randomCellCord = new int[2];
+
+    static int[] chooseRndValidCell() {
+        tryChooseRandomCell();
+        return randomCellCord;
+    }
+
+    private static void tryChooseRandomCell() {
+        randomCellCord[0] = (int) (Math.random() * 10);
+        randomCellCord[1] = (int) (Math.random() * 10);
+
+        int numberOfCell = numberOfCellFinder(randomCellCord);
+
+        try {
+            checkCellsEmpty(numberOfCell);
+        } catch (SBGameBusyCell e) {
+            tryChooseRandomCell();
+        }
     }
 
     //      выбор рандомного направления для установки больших кораблей
@@ -99,14 +111,8 @@ public class ShipInstallHelper {
         return anotherCellsNumbers;
     }
 
-    private static boolean checkCellsEmpty(int cellNumber) {
-        boolean empty = false;
-
-        if (!Board.getCellList().get(cellNumber).getCellChar().equals(Figure.SHIPED)) {
-            empty = true;
-        }
-
-        return empty;
+    private static void checkCellsEmpty(int cellNumber) throws SBGameBusyCell {
+        if (Board.getCellList().get(cellNumber).getCellChar().equals(Figure.SHIPED)) throw new SBGameBusyCell();
     }
 
     static void checkZoneForCellsEmpty(ArrayList<int[]> shipsZoneCellList) throws SBGameBusyZoneException {
@@ -128,15 +134,13 @@ public class ShipInstallHelper {
         }
 
 //             проверяем все ячейки на занятость
-        int goodCount = 0;
-        for (int cellNumb : cellNumbList) {
-            if (!checkCellsEmpty(cellNumb)) {
-                goodCount++;
-            }
-        }
 
-        if (goodCount != 0) {
-            throw new SBGameBusyZoneException();
+        for (int cellNumb : cellNumbList) {
+            try {
+                checkCellsEmpty(cellNumb);
+            } catch (SBGameBusyCell sbGameBusyCell) {
+                throw new SBGameBusyZoneException();
+            }
         }
     }
 
@@ -234,5 +238,19 @@ public class ShipInstallHelper {
                 }
                 break;
         }
+    }
+    
+    static ArrayList<int[]> createArrayOfNeighborCellsZone(int[] firstCellRndCord) {
+        int x = firstCellRndCord[0];
+        int y = firstCellRndCord[1];
+        ArrayList<int[]> shipsZoneCellList = new ArrayList<>();
+
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                int[] cell = {x - 1 + i, y - 1 + j};
+                shipsZoneCellList.add(cell);
+            }
+        }
+        return shipsZoneCellList;
     }
 }
