@@ -4,6 +4,8 @@ import com.coolightman.seaBattle.exceptions.SBGameBusyZoneException;
 
 import java.util.ArrayList;
 
+import static com.coolightman.seaBattle.helpers.Randomiser.chooseRndValidCell;
+import static com.coolightman.seaBattle.helpers.Randomiser.directionRndChooser;
 import static com.coolightman.seaBattle.helpers.ShipInstallHelper.*;
 
 

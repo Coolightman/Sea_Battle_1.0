@@ -9,50 +9,6 @@ import java.util.ArrayList;
 
 public class ShipInstallHelper {
 
-    private static int[] randomCellCord = new int[2];
-
-    static int[] chooseRndValidCell() {
-        tryChooseRandomCell();
-        return randomCellCord;
-    }
-
-    private static void tryChooseRandomCell() {
-        randomCellCord[0] = (int) (Math.random() * 10);
-        randomCellCord[1] = (int) (Math.random() * 10);
-
-        int numberOfCell = numberOfCellFinder(randomCellCord);
-
-        try {
-            checkCellsEmpty(numberOfCell);
-        } catch (SBGameBusyCell e) {
-            tryChooseRandomCell();
-        }
-    }
-
-    //      выбор рандомного направления для установки больших кораблей
-    static EDirection directionRndChooser() {
-        EDirection currentDirection;
-        int directionNumb = (int) (Math.random() * 4 + 1);
-
-        switch (directionNumb) {
-            case 1:
-                currentDirection = EDirection.NORTH;
-                break;
-            case 2:
-                currentDirection = EDirection.SOUTH;
-                break;
-            case 3:
-                currentDirection = EDirection.WEST;
-                break;
-            case 4:
-                currentDirection = EDirection.EAST;
-                break;
-            default:
-                currentDirection = null;
-        }
-        return currentDirection;
-    }
-
     //      установка чаров больших кораблей на доску
     static ArrayList<Integer> setBigShipCharsOnBoard(EDirection currentDirection, int[] firstCellRndCord, int SIZE) {
         int numberOfFirstCell = numberOfCellFinder(firstCellRndCord);
@@ -111,7 +67,7 @@ public class ShipInstallHelper {
         return anotherCellsNumbers;
     }
 
-    private static void checkCellsEmpty(int cellNumber) throws SBGameBusyCell {
+    static void checkCellsEmpty(int cellNumber) throws SBGameBusyCell {
         if (Board.getCellList().get(cellNumber).getCellChar().equals(Figure.SHIPED)) throw new SBGameBusyCell();
     }
 
@@ -239,7 +195,7 @@ public class ShipInstallHelper {
                 break;
         }
     }
-    
+
     static ArrayList<int[]> createArrayOfNeighborCellsZone(int[] firstCellRndCord) {
         int x = firstCellRndCord[0];
         int y = firstCellRndCord[1];
