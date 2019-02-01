@@ -24,7 +24,7 @@ public class MoveReceiver {
         } catch (SBGameWrongLengthCoordinateException e) {
             System.out.println(e.getMessage());
             receiveMove();
-        } catch (SBGameWrongCoordinateException e){
+        } catch (SBGameWrongCoordinateException e) {
             System.out.println(e.getMessage());
             receiveMove();
         }

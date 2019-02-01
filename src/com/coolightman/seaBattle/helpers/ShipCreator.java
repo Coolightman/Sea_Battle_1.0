@@ -4,12 +4,16 @@ import com.coolightman.seaBattle.exceptions.SBGameBusyZoneException;
 
 import java.util.ArrayList;
 
-import static com.coolightman.seaBattle.helpers.Randomiser.chooseRndValidCell;
-import static com.coolightman.seaBattle.helpers.Randomiser.directionRndChooser;
-import static com.coolightman.seaBattle.helpers.ShipInstallHelper.*;
+import static com.coolightman.seaBattle.helpers.Randomize.chooseRndValidCell;
+import static com.coolightman.seaBattle.helpers.Randomize.directionRndChooser;
+import static com.coolightman.seaBattle.helpers.SetterShipsCharsOnBoard.setBigShipCharsOnBoard;
+import static com.coolightman.seaBattle.helpers.SetterShipsCharsOnBoard.setLittleShipCharOnBoard;
+import static com.coolightman.seaBattle.helpers.ShipCreatorHelper.*;
+import static com.coolightman.seaBattle.helpers.ZonesCreator.createZoneCellListForBigShips;
+import static com.coolightman.seaBattle.helpers.ZonesCreator.createZoneCellListForLittleShip;
 
 
-public class ShipInstall {
+public class ShipCreator {
     private static int[] firstCellRndCord;
     private static EDirection currentDirection = null;
     private static int SHIP_SIZE;
@@ -33,13 +37,13 @@ public class ShipInstall {
 
     private static void tryToSetBigShipOnBoardForRndDir() throws SBGameBusyZoneException {
         currentDirection = directionRndChooser();
-        ArrayList<int[]> shipsZoneCellList = createZoneCellList(currentDirection, firstCellRndCord, SHIP_SIZE);
+        ArrayList<int[]> shipsZoneCellList = createZoneCellListForBigShips(currentDirection, firstCellRndCord, SHIP_SIZE);
 
         try {
             validityShipCells(firstCellRndCord, currentDirection, SHIP_SIZE);
-            checkZoneForCellsEmpty(shipsZoneCellList);
+            checkZoneEmpty(shipsZoneCellList);
         } catch (SBGameBusyZoneException e) {
-//              число попыток выбора рандомного направления
+//          number of trying to set ship for random direction
             int NUMB_DIR_TRY = 6;
             currentDirectionTry++;
             if (currentDirectionTry <= NUMB_DIR_TRY) {
@@ -48,19 +52,19 @@ public class ShipInstall {
         }
     }
 
-    public static ArrayList<Integer> setShkonkaCords() {
-        tryToSetShkonkaOnBoard();
-        return setShkonkaCharOnBoard(firstCellRndCord);
+    public static ArrayList<Integer> setLittleShipCords() {
+        tryToSetLittleShipOnBoard();
+        return setLittleShipCharOnBoard(firstCellRndCord);
     }
 
-    private static void tryToSetShkonkaOnBoard() {
+    private static void tryToSetLittleShipOnBoard() {
         firstCellRndCord = chooseRndValidCell();
-        ArrayList<int[]> shipsZoneCellList = createArrayOfNeighborCellsZone(firstCellRndCord);
+        ArrayList<int[]> shipsZoneCellList = createZoneCellListForLittleShip(firstCellRndCord);
 
         try {
-            checkZoneForCellsEmpty(shipsZoneCellList);
+            checkZoneEmpty(shipsZoneCellList);
         } catch (SBGameBusyZoneException e) {
-            tryToSetShkonkaOnBoard();
+            tryToSetLittleShipOnBoard();
         }
     }
 }

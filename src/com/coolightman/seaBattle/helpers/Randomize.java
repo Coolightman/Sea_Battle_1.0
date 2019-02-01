@@ -4,10 +4,10 @@ package com.coolightman.seaBattle.helpers;
 
 import com.coolightman.seaBattle.exceptions.SBGameBusyCell;
 
-import static com.coolightman.seaBattle.helpers.ShipInstallHelper.checkCellsEmpty;
-import static com.coolightman.seaBattle.helpers.ShipInstallHelper.numberOfCellFinder;
+import static com.coolightman.seaBattle.helpers.ShipCreatorHelper.checkCellsEmpty;
+import static com.coolightman.seaBattle.helpers.ShipCreatorHelper.numberOfCellFinder;
 
-class Randomiser {
+class Randomize {
 
     private static int[] randomCellCord = new int[2];
 

@@ -1,7 +1,7 @@
 package com.coolightman.seaBattle.model;
 
 
-import com.coolightman.seaBattle.helpers.ShipInstall;
+import com.coolightman.seaBattle.helpers.ShipCreator;
 
 import java.util.ArrayList;
 
@@ -18,21 +18,21 @@ public class Ship {
         switch (shipName) {
             case LINKOR:
                 int shipSize = 4;
-                this.shipCords = ShipInstall.setBigShipCords(shipSize);
+                this.shipCords = ShipCreator.setBigShipCords(shipSize);
                 break;
 
             case KREISER:
                 shipSize = 3;
-                this.shipCords = ShipInstall.setBigShipCords(shipSize);
+                this.shipCords = ShipCreator.setBigShipCords(shipSize);
                 break;
 
             case ESMINEC:
                 shipSize = 2;
-                this.shipCords = ShipInstall.setBigShipCords(shipSize);
+                this.shipCords = ShipCreator.setBigShipCords(shipSize);
                 break;
 
             case SHKONKA:
-                this.shipCords = ShipInstall.setShkonkaCords();
+                this.shipCords = ShipCreator.setLittleShipCords();
                 break;
         }
     }
