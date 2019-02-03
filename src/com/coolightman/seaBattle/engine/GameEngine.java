@@ -1,7 +1,7 @@
 package com.coolightman.seaBattle.engine;
 
-import com.coolightman.seaBattle.helpers.MoveReceiver;
-import com.coolightman.seaBattle.helpers.ShipCreatorHelper;
+
+import com.coolightman.seaBattle.exceptions.SBGameIsNotEndException;
 import com.coolightman.seaBattle.model.Board;
 import com.coolightman.seaBattle.model.EShip;
 import com.coolightman.seaBattle.model.Figure;
@@ -9,8 +9,21 @@ import com.coolightman.seaBattle.model.Ship;
 
 import java.util.ArrayList;
 
+import static com.coolightman.seaBattle.helpers.MoveReceiver.receivePlayerMove;
+import static com.coolightman.seaBattle.helpers.ShipCreatorHelper.numberOfCellFinder;
+
 public class GameEngine {
     private static ArrayList<Ship> shipArrayList = new ArrayList<>();
+    private static int linkorNumb = 1;
+    private static int kreiserNumb = 2;
+    private static int esminecNumb = 3;
+    private static int shkonkaNumb = 4;
+    private static int sumOfShips = linkorNumb + kreiserNumb + esminecNumb + shkonkaNumb;
+    private static int moveCellNumber;
+    private static boolean haveHit;
+    private static int hitCounter;
+    private static int movesCounter;
+
 
     public static void start() {
         createModelsForGame();
@@ -20,80 +33,88 @@ public class GameEngine {
     private static void createModelsForGame() {
         Board.createBoard();
         arrangeShipsOnBoard();
-
-//        выводит поле со всеми кораблями
         Board.printBoardWithShips();
         Board.printGameBoard();
     }
 
     private static void runGameProcess() {
-        boolean allShipsDead = false;
-        int movesCounter = 0;
-        int hitCounter = 0;
+        try {
+            tryNextMove();
+            System.out.println("You Win by " + movesCounter + " shots. Congratulations! =)");
+        } catch (SBGameIsNotEndException e) {
+            runGameProcess();
+        }
+    }
 
-        do {
+    private static void tryNextMove() throws SBGameIsNotEndException {
+        int[] playerMove = receivePlayerMove();
+        moveCellNumber = numberOfCellFinder(playerMove);
+        haveHit = false;
 
-            int[] playerMove = MoveReceiver.receivePlayerMove();
-            int moveCellNumber = ShipCreatorHelper.numberOfCellFinder(playerMove);
-            boolean haveHit = false;
-
-            for (int i = 0; i < 10; i++) {
-                ArrayList<Integer> shipCords = shipArrayList.get(i).getShipCords();
-                for (int shipCord : shipCords) {
-                    if (shipCord == moveCellNumber) {
-                        if (!Board.getCellList().get(moveCellNumber).getCellChar().equals(Figure.X) &&
-                                !Board.getCellList().get(moveCellNumber).getCellChar().equals(Figure.O)) {
-                            Board.getCellList().get(moveCellNumber).setCellChar(Figure.O);
-                            boolean shipDead = checkShipDead(i);
-                            haveHit = true;
-                            hitCounter++;
-                            if (!shipDead) {
-                                System.out.println("Injured");
-                            }
-                            break;
+        for (int i = 0; i < sumOfShips; i++) {
+            ArrayList<Integer> shipCords = shipArrayList.get(i).getShipCords();
+            for (int shipCord : shipCords) {
+                if (shipCord == moveCellNumber) {
+                    if (!getCellFigure(moveCellNumber).equals(Figure.X) && !getCellFigure(moveCellNumber).equals(Figure.O)) {
+                        setCellFigure(Figure.O);
+                        boolean shipDead = checkShipDead(i);
+                        haveHit = true;
+                        hitCounter++;
+                        if (!shipDead) {
+                            System.out.println("Injured");
                         }
+                        break;
                     }
                 }
-                if (haveHit) break;
             }
+            if (haveHit) break;
+        }
 
-            if (!haveHit) {
-                if (!Board.getCellList().get(moveCellNumber).getCellChar().equals(Figure.X) && !Board.getCellList().get(moveCellNumber).getCellChar().equals(Figure.O)) {
-                    Board.getCellList().get(moveCellNumber).setCellChar(Figure.MISS);
-                }
-                System.out.println("Miss!");
+        checkMiss();
+        movesCounter++;
+        Board.printGameBoard();
+        if (!checkWin(hitCounter)) throw new SBGameIsNotEndException();
+    }
+
+    private static void setCellFigure(Figure figure) {
+        Board.getCellList().get(moveCellNumber).setCellChar(figure);
+    }
+
+    private static boolean checkWin(int hitCounter) {
+        return hitCounter == 20;
+    }
+
+    private static void checkMiss() {
+        if (!haveHit) {
+            System.out.println("Miss!");
+            if (!getCellFigure(moveCellNumber).equals(Figure.X) && !getCellFigure(moveCellNumber).equals(Figure.O)) {
+                setCellFigure(Figure.MISS);
             }
+        }
+    }
 
-            if (hitCounter == 20) {
-                allShipsDead = true;
-            }
-
-            Board.printGameBoard();
-
-            movesCounter++;
-
-        } while (!allShipsDead);
-
-        System.out.println("You Win by " + movesCounter + " shots. Congratulations! =)");
+    private static Figure getCellFigure(int moveCellNumber) {
+        return Board.getCellList().get(moveCellNumber).getCellChar();
     }
 
     private static boolean checkShipDead(int shipNumber) {
-        boolean shipDead = false;
         ArrayList<Integer> shipCords = shipArrayList.get(shipNumber).getShipCords();
         int damagedParts = 0;
+
         for (int shipCord : shipCords) {
             if (Board.getCellList().get(shipCord).getCellChar().equals(Figure.O)) {
                 damagedParts++;
             }
         }
+
         if (damagedParts == shipCords.size()) {
             for (int shipCord : shipCords) {
                 Board.getCellList().get(shipCord).setCellChar(Figure.X);
             }
-            shipDead = true;
             System.out.println("Ship " + shipArrayList.get(shipNumber).getFullShipName() + " is dead =(");
+            return true;
         }
-        return shipDead;
+        return false;
     }
 
     public static void settings() {
@@ -103,17 +124,22 @@ public class GameEngine {
 
     private static void arrangeShipsOnBoard() {
 
-        shipArrayList.add(new Ship(EShip.LINKOR, 1));
-
-        for (int i = 0; i < 2; i++) {
+        int linkorNumb = 1;
+        for (int i = 0; i < linkorNumb; i++) {
+            shipArrayList.add(new Ship(EShip.LINKOR, (i + 1)));
+        }
+        int kreiserNumb = 2;
+        for (int i = 0; i < kreiserNumb; i++) {
             shipArrayList.add(new Ship(EShip.KREISER, (i + 1)));
         }
 
-        for (int i = 0; i < 3; i++) {
+        int esminecNumb = 3;
+        for (int i = 0; i < esminecNumb; i++) {
             shipArrayList.add(new Ship(EShip.ESMINEC, (i + 1)));
         }
 
-        for (int i = 0; i < 4; i++) {
+        int shkonkaNumb = 4;
+        for (int i = 0; i < shkonkaNumb; i++) {
             shipArrayList.add(new Ship(EShip.SHKONKA, (i + 1)));
         }
     }
