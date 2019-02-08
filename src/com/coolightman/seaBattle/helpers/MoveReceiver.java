@@ -5,13 +5,15 @@ import com.coolightman.seaBattle.exceptions.SBGameWrongLengthCoordinateException
 
 import java.util.Scanner;
 
+import static com.coolightman.seaBattle.helpers.ShipCreatorHelper.numberOfCellFinder;
+
 public class MoveReceiver {
 
     private static int[] move = new int[2];
 
-    public static int[] receivePlayerMove() {
+    public static int receivePlayerMove() {
         receiveMove();
-        return move;
+        return numberOfCellFinder(move);
     }
 
     private static void receiveMove() {
