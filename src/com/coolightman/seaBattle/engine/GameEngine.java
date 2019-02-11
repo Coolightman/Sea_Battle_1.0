@@ -44,7 +44,7 @@ public class GameEngine {
             printBoardWithShips();
 //            printGameBoard();
             movesCounter++;
-        } while (!checkWin(hitCounter));
+        } while (!checkWin());
         System.out.println("You Win by " + movesCounter + " shots. Congratulations! =)");
     }
 
@@ -151,7 +151,7 @@ public class GameEngine {
         Board.getCellList().get(cellNUmber).setCellChar(figure);
     }
 
-    private static boolean checkWin(int hitCounter) {
+    private static boolean checkWin() {
         if (wasHit) {
             hitCounter++;
         }
